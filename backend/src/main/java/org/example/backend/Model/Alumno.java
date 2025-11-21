@@ -2,20 +2,20 @@ package org.example.backend.Model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Alumno")
+@Table(name = "alumno")
 public class Alumno {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nombre;
-    private String correo;
+    private String a_paterno;
 
     public Alumno() {}
 
     public Alumno(String nombre, String correo) {
         this.nombre = nombre;
-        this.correo = correo;
+        this.a_paterno = a_paterno;
     }
 
     // Getters y setters
@@ -31,12 +31,12 @@ public class Alumno {
         this.nombre = nombre;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getA_paterno() {
+        return a_paterno;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setA_paterno(String correo) {
+        this.a_paterno = a_paterno;
     }
 }
 
