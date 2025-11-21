@@ -1,10 +1,9 @@
-package org.example.backend.Controller;
+package org.lumina.backend.Controller;
 
-import org.example.backend.Model.Alumno;
-import org.example.backend.Repository.AlumnoRepository;
+import org.lumina.backend.Model.Alumno;
+import org.lumina.backend.Repository.AlumnoRepository;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 @RestController
 @RequestMapping("/api/Alumno")
 public class AlumnoController {

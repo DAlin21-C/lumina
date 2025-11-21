@@ -1,4 +1,4 @@
-package org.example.backend.Model;
+package org.lumina.backend.Model;
 import jakarta.persistence.*;
 
 @Entity
