@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 
+
 // Rutas de las imágenes estáticas (asumiendo que están en 'public/')
 const LogoCBTA = '/cbta.png';
 const CharacterImage = '/camaleon.png';
