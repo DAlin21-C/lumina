@@ -1,120 +1,139 @@
-/* Variables de color para fácil manejo */
+/* ================================
+   VARIABLES DE COLOR
+================================ */
 :root {
-    --color-dark-green: #2e6059; /* El verde oscuro de los puntos y el círculo */
-    --color-light-bg: #f0f7e4;   /* El verde claro del fondo principal */
-    --color-card-bg: #e5f2cf;    /* El verde más claro de la tarjeta de login */
-    --color-button: #ffae42;     /* Naranja/Amarillo del botón */
+    --color-dark-green: #2e6059;
+    --color-light-bg: #f0f7e4;
+    --color-card-bg: #e5f2cf;
+    --color-button: #ffae42;
     --color-text: #333;
 }
 
+/* ================================
+   ESTILOS GENERALES
+================================ */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
 }
 
-/* Contenedor principal para centrar las dos secciones */
 .login-page {
     display: flex;
     height: 100vh;
+    width: 100vw;
     background-color: var(--color-light-bg);
 }
 
-/* === 1. Sección Izquierda (Círculo y Personaje) === */
-
+/* ================================
+   SECCIÓN IZQUIERDA
+================================ */
 .left-section {
-    width: 40%; /* La sección izquierda ocupa menos espacio */
+    width: 40%;
     display: flex;
-    align-items: center; /* Centrar el círculo verticalmente */
-    justify-content: flex-end; /* Mover el círculo hacia la derecha */
-    padding-right: 50px;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 5vw;
 }
 
 .left-circle-bg {
-    width: 600px;
-    height: 600px;
+    /* Usamos una unidad de viewport (vw) o un tamaño flexible basado en el contenedor */
+    width: 280vw; /* El círculo ocupará la mitad del ancho de la ventana */
+    height: 280vw; /* Hacemos que la altura sea igual al ancho para mantenerlo redondo */
+    max-width: 600px; /* Opcional: Establecer un tamaño máximo para pantallas muy grandes */
+    max-height: 600px;
+
     background-color: var(--color-dark-green);
     border-radius: 50%;
 
-    /* El personaje debe estar posicionado absolutamente DENTRO de este círculo */
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.2) 8px, transparent 8px);
+    background-size: 50px 50px;
+
     position: relative;
+    /* Ajustamos el desplazamiento para que el círculo no se vea raro al achicar */
+    right: -5vw;
+    overflow: visible;
 }
 
-/* Placeholder para la imagen del personaje */
-/* NOTA: Para replicar el efecto exacto, la imagen real del personaje (CharacterImage)
-   debe tener fondo transparente y debe ser posicionada aquí. */
 .character-image {
-    /* 1. Posicionamiento: Permite mover la imagen libremente dentro de su padre (left-circle-bg) */
     position: absolute;
-
-    /* 2. Tamaño: Haz que la imagen sea grande, puede ser más del 100% del círculo */
     width: 120%;
     height: auto;
-
-    /* 3. Colocación Horizontal: Muévelo ligeramente hacia la izquierda para centrar el cuerpo */
     left: -50px;
-
-    /* 4. Colocación Vertical: Lo más importante. Mueve la imagen hacia abajo
-          para que parezca que está parado sobre el círculo. */
-    bottom: 0; /* Lo coloca al borde inferior del círculo */
-
-    /* 5. Ajustes finos: Puedes usar un valor negativo para bajarlo aún más */
-    transform: translateY(15%); /* Mueve el personaje un 15% hacia abajo (fuera del círculo) */
-
-    /* Asegurar que esté siempre visible (opcional) */
+    bottom: 0;
+    transform: translateY(15%);
     z-index: 10;
 }
 
-/* === 2. Sección Derecha (Formulario) === */
-
+/* ================================
+   SECCIÓN DERECHA
+================================ */
 .right-section {
     width: 60%;
     display: flex;
-    align-items: center; /* Centrar la tarjeta verticalmente */
-    justify-content: flex-start; /* Alinear la tarjeta a la izquierda de esta sección */
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .login-card {
     background-color: var(--color-card-bg);
-    padding: 60px 80px;
+    padding: 60px 80px;  /* reducido */
     border-radius: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 400px;
+    width: 260px;        /* reducido */
+    max-width: 450px;
+    height: auto;
     text-align: center;
-    position: relative; /* Para el logo LUMINA */
+    position: relative;
+    margin: 60px auto;
 }
 
-.top-logo {
+/* 1. Ajuste del Contenedor: Aseguramos que la posición sea la correcta */
+.top-logo-container {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    /* Ajusta la posición para que esté cerca del borde */
+    top: 12px;
+    right: 12px;
+    display: flex;
+    align-items: center;
     font-weight: bold;
     color: var(--color-dark-green);
+    /* Mantén el tamaño del texto LUMINA */
+    font-size: 1.1em;
+}
+
+/* 2. ESTILO CLAVE: Reducir el tamaño de la imagen/ícono */
+.lumina-icon {
+    /* Define un tamaño fijo pequeño para el ícono */
+    width: 70px; /* Puedes ajustar este valor: 25px, 30px, etc. */
+    height: auto; /* Mantiene la proporción de la imagen */
+
+    /* Agrega un pequeño margen para separarlo del texto "LUMINA" */
+    margin-left: 5px;
 }
 
 .cbta-logo {
-    width: 80px; /* Ajusta el tamaño del logo */
+    width: 80px;
     margin-bottom: 20px;
 }
 
 .welcome-text {
-    font-size: 1.5em;
-    font-weight: normal;
+    font-size: 1.2em;    /* reducido */
     margin-bottom: 5px;
     color: var(--color-text);
 }
 
 .session-text {
-    font-size: 2em;
+    font-size: 1.6em;    /* reducido */
     font-weight: bold;
     margin-top: 0;
-    margin-bottom: 40px;
+    margin-bottom: 25px; /* reducido */
     color: var(--color-text);
 }
 
-/* Estilos de los campos de entrada */
+/* INPUTS */
 .input-group {
     text-align: left;
-    margin-bottom: 30px;
+    margin-bottom: 20px; /* reducido */
 }
 
 .input-group label {
@@ -130,30 +149,29 @@ body {
     border: none;
     border-bottom: 1px solid #ccc;
     background-color: transparent;
-    font-size: 1.1em;
+    font-size: 1em; /* reducido */
     outline: none;
 }
 
-/* Enlace de contraseña olvidada */
 .forgot-password {
     display: block;
     text-align: right;
     font-size: 0.9em;
     color: #888;
     text-decoration: none;
-    margin-top: -20px; /* Ajusta la posición */
-    margin-bottom: 30px;
+    margin-top: -10px;
+    margin-bottom: 25px; /* reducido */
 }
 
-/* Botón de inicio de sesión */
+/* BOTÓN */
 .login-button {
     background-color: var(--color-button);
     color: white;
     border: none;
-    padding: 15px 40px;
+    padding: 12px 30px; /* reducido */
     border-radius: 30px;
     cursor: pointer;
-    font-size: 1.2em;
+    font-size: 1.1em;  /* reducido */
     font-weight: bold;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     width: 100%;
@@ -162,4 +180,82 @@ body {
 
 .login-button:hover {
     background-color: #e69d3f;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+/* --- TABLET (pantallas medianas) --- */
+@media (max-width: 992px) {
+
+    .login-page {
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+    }
+
+    .left-section {
+        width: 100%;
+        justify-content: center;
+        padding: 0;
+    }
+
+    .left-circle-bg {
+        width: 40vw;
+        height: 40vw;
+    }
+
+    .right-section {
+        width: 100%;
+        justify-content: center;
+        margin-top: 30px;
+    }
+}
+
+/* --- CELULAR --- */
+@media (max-width: 768px) {
+
+    .left-circle-bg {
+        width: 55vw;
+        height: 55vw;
+        min-width: 220px;
+        min-height: 220px;
+    }
+
+    .character-image {
+        width: 150%;
+        left: -30px;
+        transform: translateY(20%);
+    }
+
+    .login-card {
+        width: 80%;
+        padding: 30px 20px;  /* más pequeño */
+    }
+
+    .welcome-text {
+        font-size: 1.1em;
+    }
+
+    .session-text {
+        font-size: 1.4em;
+    }
+}
+
+/* --- CELULAR PEQUEÑO --- */
+@media (max-width: 480px) {
+
+    .left-circle-bg {
+        width: 65vw;
+        height: 65vw;
+    }
+
+    .character-image {
+        width: 160%;
+    }
+
+    .login-card {
+        padding: 25px 15px;
+    }
 }
