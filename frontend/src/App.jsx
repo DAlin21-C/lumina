@@ -1,124 +1,59 @@
-import React, { useState } from "react";
+import './App.css'; // Asegúrate de importar el CSS
+
+// Simulación de los recursos de imagen (DEBES reemplazarlos con tus archivos reales)
+const LogoCBTA = 'cbta.png'; // Reemplaza con la ruta a tu logo
+const CharacterImage = 'camaleon.png'; // Reemplaza con la ruta a tu personaje
 
 function App() {
-    const [form, setForm] = useState({
-        nombre: "",
-        aPaterno: "",
-        aMaterno: "",
-        noControl: "",
-        grado: "",
-        especialidad: "",
-        telefono: "",
-        codigoBarra: "",
-        salt: ""
-    });
-
-    const [mensaje, setMensaje] = useState("");
-
-    const handleChange = (e) => {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value
-        });
-    };
-
-    const insertarAlumno = async (e) => {
-        e.preventDefault();
-
-        const res = await fetch("http://localhost:8080/api/Alumno/insertar", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(form)
-        });
-
-        const text = await res.text();
-        setMensaje(text);
-    };
-
     return (
-        <div style={{ width: "350px", margin: "50px auto" }}>
-            <h2>Registrar Alumno</h2>
+        <div className="login-page">
+            {/* 1. Sección Izquierda: Ilustración y Círculo */}
+            <div className="left-section">
+                <div className="left-circle-bg">
+                    {/* Colocamos la imagen DIRECTAMENTE aquí para controlarla con CSS */}
+                    <img
+                        src={CharacterImage}
+                        alt="Personaje Camaleón CBTA 134"
+                        className="character-image"
+                    />
 
-            <form onSubmit={insertarAlumno}>
-                <input
-                    type="text"
-                    name="nombre"
-                    placeholder="Nombre"
-                    value={form.nombre}
-                    onChange={handleChange}
-                    required
-                /><br />
+                    {/* Eliminamos el div.character-placeholder que ya no es necesario */}
+                </div>
+            </div>
 
-                <input
-                    type="text"
-                    name="aPaterno"
-                    placeholder="Apellido Paterno"
-                    value={form.aPaterno}
-                    onChange={handleChange}
-                    required
-                /><br />
+            {/* 2. Sección Derecha: Formulario de Inicio de Sesión */}
+            <div className="right-section">
+                {/* Contenedor del formulario con el fondo verde claro */}
+                <div className="login-card">
+                    {/* Logo superior (LUMINA) - Lo dejamos como placeholder de texto o lo quitas */}
+                    <div className="top-logo">LUMINA</div>
 
-                <input
-                    type="text"
-                    name="aMaterno"
-                    placeholder="Apellido Materno"
-                    value={form.aMaterno}
-                    onChange={handleChange}
-                /><br />
+                    {/* Logo CBTA 134 */}
+                    <img src={LogoCBTA} alt="CBTA 134 Logo" className="cbta-logo" />
 
-                <input
-                    type="number"
-                    name="noControl"
-                    placeholder="No. Control"
-                    value={form.noControl}
-                    onChange={handleChange}
-                    required
-                /><br />
+                    <h2 className="welcome-text">Bienvenido</h2>
+                    <h3 className="session-text">Iniciar Sesión</h3>
 
-                <input
-                    type="text"
-                    name="grado"
-                    placeholder="Grado"
-                    value={form.grado}
-                    onChange={handleChange}
-                /><br />
+                    {/* Formulario */}
+                    <form>
+                        <div className="input-group">
+                            <label htmlFor="user-input">Usuario</label>
+                            <input type="text" id="user-input" placeholder=" " />
+                        </div>
 
-                <input
-                    type="text"
-                    name="especialidad"
-                    placeholder="Especialidad"
-                    value={form.especialidad}
-                    onChange={handleChange}
-                /><br />
+                        <div className="input-group">
+                            <label htmlFor="password-input">Contraseña</label>
+                            <input type="password" id="password-input" placeholder=" " />
+                        </div>
 
-                <input
-                    type="text"
-                    name="telefono"
-                    placeholder="Teléfono"
-                    value={form.telefono}
-                    onChange={handleChange}
-                /><br />
+                        <a href="#" className="forgot-password">¿Olvidaste tu contraseña?</a>
 
-                <input
-                    type="text"
-                    name="codigoBarra"
-                    placeholder="Código de Barra"
-                    value={form.codigoBarra}
-                    onChange={handleChange}
-                /><br />
-
-                <input
-                    type="text"
-                    name="salt"
-                    placeholder="Salt"
-                    value={form.salt}
-                    onChange={handleChange}
-                /><br />
-
-                <button type="submit">Guardar</button>
-            </form>
-
-            <p>{mensaje}</p>
+                        <button type="submit" className="login-button">
+                            Iniciar Sesión
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
     );
 }

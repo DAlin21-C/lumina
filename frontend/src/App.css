@@ -1,42 +1,165 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* Variables de color para fácil manejo */
+:root {
+    --color-dark-green: #2e6059; /* El verde oscuro de los puntos y el círculo */
+    --color-light-bg: #f0f7e4;   /* El verde claro del fondo principal */
+    --color-card-bg: #e5f2cf;    /* El verde más claro de la tarjeta de login */
+    --color-button: #ffae42;     /* Naranja/Amarillo del botón */
+    --color-text: #333;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Contenedor principal para centrar las dos secciones */
+.login-page {
+    display: flex;
+    height: 100vh;
+    background-color: var(--color-light-bg);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* === 1. Sección Izquierda (Círculo y Personaje) === */
+
+.left-section {
+    width: 40%; /* La sección izquierda ocupa menos espacio */
+    display: flex;
+    align-items: center; /* Centrar el círculo verticalmente */
+    justify-content: flex-end; /* Mover el círculo hacia la derecha */
+    padding-right: 50px;
 }
 
-.card {
-  padding: 2em;
+.left-circle-bg {
+    width: 600px;
+    height: 600px;
+    background-color: var(--color-dark-green);
+    border-radius: 50%;
+
+    /* El personaje debe estar posicionado absolutamente DENTRO de este círculo */
+    position: relative;
 }
 
-.read-the-docs {
-  color: #888;
+/* Placeholder para la imagen del personaje */
+/* NOTA: Para replicar el efecto exacto, la imagen real del personaje (CharacterImage)
+   debe tener fondo transparente y debe ser posicionada aquí. */
+.character-image {
+    /* 1. Posicionamiento: Permite mover la imagen libremente dentro de su padre (left-circle-bg) */
+    position: absolute;
+
+    /* 2. Tamaño: Haz que la imagen sea grande, puede ser más del 100% del círculo */
+    width: 120%;
+    height: auto;
+
+    /* 3. Colocación Horizontal: Muévelo ligeramente hacia la izquierda para centrar el cuerpo */
+    left: -50px;
+
+    /* 4. Colocación Vertical: Lo más importante. Mueve la imagen hacia abajo
+          para que parezca que está parado sobre el círculo. */
+    bottom: 0; /* Lo coloca al borde inferior del círculo */
+
+    /* 5. Ajustes finos: Puedes usar un valor negativo para bajarlo aún más */
+    transform: translateY(15%); /* Mueve el personaje un 15% hacia abajo (fuera del círculo) */
+
+    /* Asegurar que esté siempre visible (opcional) */
+    z-index: 10;
+}
+
+/* === 2. Sección Derecha (Formulario) === */
+
+.right-section {
+    width: 60%;
+    display: flex;
+    align-items: center; /* Centrar la tarjeta verticalmente */
+    justify-content: flex-start; /* Alinear la tarjeta a la izquierda de esta sección */
+}
+
+.login-card {
+    background-color: var(--color-card-bg);
+    padding: 60px 80px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+    position: relative; /* Para el logo LUMINA */
+}
+
+.top-logo {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-weight: bold;
+    color: var(--color-dark-green);
+}
+
+.cbta-logo {
+    width: 80px; /* Ajusta el tamaño del logo */
+    margin-bottom: 20px;
+}
+
+.welcome-text {
+    font-size: 1.5em;
+    font-weight: normal;
+    margin-bottom: 5px;
+    color: var(--color-text);
+}
+
+.session-text {
+    font-size: 2em;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 40px;
+    color: var(--color-text);
+}
+
+/* Estilos de los campos de entrada */
+.input-group {
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    color: var(--color-text);
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    background-color: transparent;
+    font-size: 1.1em;
+    outline: none;
+}
+
+/* Enlace de contraseña olvidada */
+.forgot-password {
+    display: block;
+    text-align: right;
+    font-size: 0.9em;
+    color: #888;
+    text-decoration: none;
+    margin-top: -20px; /* Ajusta la posición */
+    margin-bottom: 30px;
+}
+
+/* Botón de inicio de sesión */
+.login-button {
+    background-color: var(--color-button);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.login-button:hover {
+    background-color: #e69d3f;
 }
