@@ -3,7 +3,7 @@
 ================================ */
 :root {
     --color-dark-green: #2e6059;
-    --color-light-bg: #f0f7e4;
+    --color-light-bg: #FFFADB;
     --color-card-bg: #e5f2cf;
     --color-button: #ffae42;
     --color-text: #333;
@@ -27,40 +27,48 @@ body {
 /* ================================
    SECCIÓN IZQUIERDA
 ================================ */
+/* ================================
+   SECCIÓN IZQUIERDA (Círculo Parcial)
+================================ */
 .left-section {
-    width: 40%;
+    width: 50%;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    padding-right: 5vw;
+    justify-content: center;
+    position: relative;
+    overflow: hidden; /* Esto corta el círculo para que no tape el login */
+    background-color: var(--color-light-bg);
 }
 
 .left-circle-bg {
-    /* Usamos una unidad de viewport (vw) o un tamaño flexible basado en el contenedor */
-    width: 280vw; /* El círculo ocupará la mitad del ancho de la ventana */
-    height: 280vw; /* Hacemos que la altura sea igual al ancho para mantenerlo redondo */
-    max-width: 600px; /* Opcional: Establecer un tamaño máximo para pantallas muy grandes */
-    max-height: 600px;
-
-    background-color: var(--color-dark-green);
+    /* Hacemos el círculo GIGANTE */
+    width: 149vh;
+    height: 150vh;
+    background-color: #1d4d40; /* Verde oscuro de la imagen */
     border-radius: 50%;
 
-    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.2) 8px, transparent 8px);
-    background-size: 50px 50px;
+    /* Puntos mucho más grandes y muy separados */
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.15) 35px, transparent 35px);
+    background-size: 160px 160px;
 
-    position: relative;
-    /* Ajustamos el desplazamiento para que el círculo no se vea raro al achicar */
-    right: -5vw;
-    overflow: visible;
+    position: absolute;
+    /* Lo movemos mucho a la izquierda para que solo se vea una curva */
+    left: -60vh;
+    top: 50%;
+    transform: translateY(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Alinea el contenido al borde derecho del círculo */
 }
 
 .character-image {
     position: absolute;
-    width: 120%;
+    width: 36%; /* Ajusta el tamaño del camaleón */
     height: auto;
-    left: -50px;
-    bottom: 0;
-    transform: translateY(15%);
+    /* Lo posicionamos justo en el borde del círculo visible */
+    right: 15%;
+    bottom: 23%;
     z-index: 10;
 }
 
@@ -68,10 +76,10 @@ body {
    SECCIÓN DERECHA
 ================================ */
 .right-section {
-    width: 60%;
+    width: 55%;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center; /* Centra la tarjeta en su mitad */
 }
 
 .login-card {
@@ -89,30 +97,20 @@ body {
 
 /* 1. Ajuste del Contenedor: Aseguramos que la posición sea la correcta */
 .top-logo-container {
-    position: absolute;
-    /* Ajusta la posición para que esté cerca del borde */
-    top: 12px;
-    right: 12px;
-    display: flex;
-    align-items: center;
-    font-weight: bold;
-    color: var(--color-dark-green);
-    /* Mantén el tamaño del texto LUMINA */
-    font-size: 1.1em;
+    position: fixed; /* O absolute relativo a .login-page */
+    top: 1px;
+    right: 5px;
+    z-index: 20;
 }
 
 /* 2. ESTILO CLAVE: Reducir el tamaño de la imagen/ícono */
 .lumina-icon {
-    /* Define un tamaño fijo pequeño para el ícono */
-    width: 70px; /* Puedes ajustar este valor: 25px, 30px, etc. */
-    height: auto; /* Mantiene la proporción de la imagen */
-
-    /* Agrega un pequeño margen para separarlo del texto "LUMINA" */
-    margin-left: 5px;
+    width: 80px; /* Un poco más grande según la imagen */
+    height: auto;
 }
 
 .cbta-logo {
-    width: 80px;
+    width: 110px;
     margin-bottom: 20px;
 }
 
@@ -151,6 +149,8 @@ body {
     background-color: transparent;
     font-size: 1em; /* reducido */
     outline: none;
+
+    color: #808080;
 }
 
 .forgot-password {
