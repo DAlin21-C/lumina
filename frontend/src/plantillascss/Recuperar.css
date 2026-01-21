@@ -33,42 +33,28 @@ body {
 .left-section {
     width: 50%;
     display: flex;
-    align-items: center;
-    justify-content: center;
     position: relative;
-    overflow: hidden; /* Esto corta el círculo para que no tape el login */
     background-color: var(--color-light-bg);
 }
 
-.left-circle-bg {
-    /* Hacemos el círculo GIGANTE */
-    width: 149vh;
-    height: 150vh;
-    background-color: #1d4d40; /* Verde oscuro de la imagen */
-    border-radius: 50%;
-
-    /* Puntos mucho más grandes y muy separados */
-    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.15) 35px, transparent 35px);
-    background-size: 160px 160px;
-
-    position: absolute;
-    /* Lo movemos mucho a la izquierda para que solo se vea una curva */
-    left: -60vh;
-    top: 50%;
-    transform: translateY(-50%);
-
-    display: flex;
-    align-items: center;
-    justify-content: flex-end; /* Alinea el contenido al borde derecho del círculo */
-}
 
 .character-image {
     position: absolute;
-    width: 36%; /* Ajusta el tamaño del camaleón */
+    width: 29%; /* Ajusta el tamaño del camaleón */
     height: auto;
     /* Lo posicionamos justo en el borde del círculo visible */
     right: 15%;
     bottom: 23%;
+    z-index: 10;
+}
+.icon-codigo {
+    position: absolute;
+    width: 23%; /* Ajusta el tamaño del camaleón */
+    height: auto;
+    /* Lo posicionamos justo en el borde del círculo visible */
+    left: 10%;
+    position: fixed;
+    top: 8%;
     z-index: 10;
 }
 
@@ -163,8 +149,10 @@ body {
     margin-bottom: 25px; /* reducido */
 }
 
-/* BOTÓN */
-.login-button {
+.regresar-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
     background-color: var(--color-button);
     color: white;
     border: none;
@@ -174,11 +162,13 @@ body {
     font-size: 1.1em;  /* reducido */
     font-weight: bold;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    width: 100%;
+    width: 15%;
     transition: background-color 0.3s;
-}
 
-.login-button:hover {
+}
+/* BOTÓN */
+
+.regresar-button:hover {
     background-color: #e69d3f;
 }
 
