@@ -17,7 +17,7 @@ body {
     font-family: Arial, sans-serif;
 }
 
-.recuperar-page {
+.cambiar-page {
     display: flex;
     height: 100vh;
     width: 100vw;
@@ -30,24 +30,24 @@ body {
 /* ================================
    SECCIÓN IZQUIERDA (Círculo Parcial)
 ================================ */
-.recuperar-left-section {
+.cambiar-left-section {
     width: 50%;
     display: flex;
     position: relative;
     background-color: var(--color-light-bg);
 }
 
-
-.recuperar-character-image {
+.cambiar-character-image {
     position: absolute;
-    width: 29%; /* Ajusta el tamaño del camaleón */
+    width: 75%;
     height: auto;
-    /* Lo posicionamos justo en el borde del círculo visible */
-    right: 15%;
-    bottom: 23%;
-    z-index: 10;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
-.recuperar-icon {
+
+.cambiar-icon {
     position: absolute;
     width: 23%; /* Ajusta el tamaño del camaleón */
     height: auto;
@@ -61,20 +61,20 @@ body {
 /* ================================
    SECCIÓN DERECHA
 ================================ */
-.recuperar-right-section {
+.cambiar-right-section {
     width: 55%;
     display: flex;
     align-items: center;
     justify-content: center; /* Centra la tarjeta en su mitad */
 }
 
-.recuperar-card {
+.cambiar-card {
     background-color: var(--color-card-bg);
     padding: 60px 80px;  /* reducido */
     border-radius: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 400px;        /* reducido */
-    max-width: 450px;
+    width: 410px;        /* reducido */
+    max-width: 480px;
     height: auto;
     text-align: center;
     position: relative;
@@ -82,7 +82,7 @@ body {
 }
 
 /* 1. Ajuste del Contenedor: Aseguramos que la posición sea la correcta */
-.recuperar-top-logo-container {
+.cambiar-top-logo-container {
     position: fixed; /* O absolute relativo a .login-page */
     top: 1px;
     right: 5px;
@@ -90,23 +90,23 @@ body {
 }
 
 /* 2. ESTILO CLAVE: Reducir el tamaño de la imagen/ícono */
-.recuperar-lumina-icon {
+.cambiar-lumina-icon {
     width: 80px; /* Un poco más grande según la imagen */
     height: auto;
 }
 
-.recuperar-cbta-logo {
+.cambiar-cbta-logo {
     width: 110px;
     margin-bottom: 20px;
 }
 
-.recuperar-welcome-text {
+.cambiar-welcome-text {
     font-size: 1.2em;    /* reducido */
     margin-bottom: 5px;
     color: var(--color-text);
 }
 
-.recuperar-session-text {
+.cambiar-session-text {
     font-size: 1.6em;    /* reducido */
     font-weight: bold;
     margin-top: 0;
@@ -115,12 +115,12 @@ body {
 }
 
 /* INPUTS */
-.recuperar-input-group {
+.cambiar-input-group {
     text-align: left;
     margin-bottom: 20px; /* reducido */
 }
 
-.recuperar-input-group label {
+.cambiar-input-group label {
     display: block;
     font-weight: bold;
     color: var(--color-text);
@@ -128,7 +128,7 @@ body {
     text-align: center;
 }
 
-.recuperar-input-group input {
+.cambiar-input-group input {
     width: 100%;
     padding: 10px 0;
     border: none;
@@ -140,7 +140,7 @@ body {
     color: #808080;
 }
 
-.recuperar-forgot-password {
+.cambiar-forgot-password {
     display: block;
     text-align: right;
     font-size: 0.9em;
@@ -149,7 +149,7 @@ body {
     margin-top: -10px;
     margin-bottom: 25px; /* reducido */
 }
-.recuperar-siguiente-button {
+.cambiar-siguiente-button {
     background-color: var(--color-button);
     color: white;
     border: none;
@@ -163,11 +163,11 @@ body {
     transition: background-color 0.3s;
 }
 
-.recuperar-siguiente-button:hover {
+.cambiar-siguiente-button:hover {
     background-color: #e69d3f;
 }
 
-.recuperar-regresar-button {
+.cambiar-regresar-button {
     position: fixed;
     bottom: 20px;
     left: 20px;
@@ -186,7 +186,7 @@ body {
 }
 /* BOTÓN */
 
-.recuperar-regresar-button:hover {
+.cambiar-regresar-button:hover {
     background-color: #e69d3f;
 }
 
@@ -197,24 +197,24 @@ body {
 /* --- TABLET (pantallas medianas) --- */
 @media (max-width: 992px) {
 
-    .recuperar-page {
+    .cambiar-page {
         flex-direction: column;
         height: auto;
         padding: 20px;
     }
 
-    .recuperar-left-section {
+    .cambiar-left-section {
         width: 100%;
         justify-content: center;
         padding: 0;
     }
 
-    .recuperar-left-circle-bg {
+    .cambiar-left-circle-bg {
         width: 40vw;
         height: 40vw;
     }
 
-    .recuperar-right-section {
+    .cambiar-right-section {
         width: 100%;
         justify-content: center;
         margin-top: 30px;
@@ -224,29 +224,29 @@ body {
 /* --- CELULAR --- */
 @media (max-width: 768px) {
 
-    .recuperar-left-circle-bg {
+    .cambiar-left-circle-bg {
         width: 55vw;
         height: 55vw;
         min-width: 220px;
         min-height: 220px;
     }
 
-    .recuperar-character-image {
+    .cambiar-character-image {
         width: 150%;
         left: -30px;
         transform: translateY(20%);
     }
 
-    .recuperar-card {
+    .cambiar-card {
         width: 80%;
         padding: 30px 20px;  /* más pequeño */
     }
 
-    .recuperar-welcome-text {
+    .cambiar-welcome-text {
         font-size: 1.1em;
     }
 
-    .recuperar-session-text {
+    .cambiar-session-text {
         font-size: 1.4em;
     }
 }
@@ -254,16 +254,16 @@ body {
 /* --- CELULAR PEQUEÑO --- */
 @media (max-width: 480px) {
 
-    .recuperar-left-circle-bg {
+    .cambiar-left-circle-bg {
         width: 65vw;
         height: 65vw;
     }
 
-    .recuperar-character-image {
+    .cambiar-character-image {
         width: 160%;
     }
 
-    .recuperar-card {
+    .cambiar-card {
         padding: 25px 15px;
     }
 }
