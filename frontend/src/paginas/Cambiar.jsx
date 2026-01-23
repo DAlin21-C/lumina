@@ -4,7 +4,7 @@ import '../plantillascss/Cambiar.css';
 
 // Rutas de las imágenes estáticas (asumiendo que están en 'public/')
 const LogoCBTA = '/cbta.png';
-const CharacterImage = '/icono_cambiar.png';
+const CharacterImage = '/clave.png';
 
 function Cambiar(props) {
     return (
