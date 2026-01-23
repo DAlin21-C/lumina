@@ -11,42 +11,42 @@ function Login() {
         <div className="login-page">
 
             {/* 1. Sección Izquierda: Ilustración y Círculo */}
-            <div className="left-section">
-                <div className="left-circle-bg">
+            <div className="login-left-section">
+                <div className="login-left-circle-bg">
                     {/* Elemento del camaleón */}
                     <img
                         src={CharacterImage}
                         alt="Personaje Camaleón CBTA 134"
-                        className="character-image"
+                        className="login-character-image"
                     />
                 </div>
             </div>
 
             {/* 2. Sección Derecha: Formulario de Inicio de Sesión */}
-            <div className="right-section">
+            <div className="login-right-section">
                 <div className="login-card">
                     {/* Logo superior (LUMINA) y Logo CBTA */}
-                    <div className="top-logo-container">
-                        <div className="top-logo-text"></div>
-                        <img src="/Lumina%20chido.png" alt="Lumina Logo" className="lumina-icon" />
+                    <div className="login-top-logo-container">
+                        <div className="login-top-logo-text"></div>
+                        <img src="/Lumina%20chido.png" alt="Lumina Logo" className="login-lumina-icon" />
                     </div>
 
-                    <img src={LogoCBTA} alt="CBTA 134 Logo" className="cbta-logo" />
+                    <img src={LogoCBTA} alt="CBTA 134 Logo" className="login-cbta-logo" />
 
                     {/* Textos de bienvenida y sesión */}
-                    <h2 className="welcome-text">Bienvenido</h2>
-                    <h3 className="session-text">Iniciar Sesión</h3>
+                    <h2 className="login-welcome-text">Bienvenido</h2>
+                    <h3 className="login-session-text">Iniciar Sesión</h3>
 
                     {/* Formulario */}
                     <form>
-                        <div className="input-group">
-                            <label htmlFor="user-input">Usuario</label>
-                            <input type="text" id="user-input" />
+                        <div className="login-input-group">
+                            <label htmlFor="login-user-input">Usuario</label>
+                            <input type="text" id="login-user-input" />
                         </div>
 
-                        <div className="input-group">
-                            <label htmlFor="password-input">Contraseña</label>
-                            <input type="password" id="password-input" />
+                        <div className="login-input-group">
+                            <label htmlFor="login-password-input">Contraseña</label>
+                            <input type="password" id="login-password-input" />
                         </div>
 
                         <a href="#" className="forgot-password">¿Olvidaste tu contraseña?</a>

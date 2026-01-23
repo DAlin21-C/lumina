@@ -30,7 +30,7 @@ body {
 /* ================================
    SECCIÓN IZQUIERDA (Círculo Parcial)
 ================================ */
-.left-section {
+.login-left-section {
     width: 50%;
     display: flex;
     align-items: center;
@@ -40,7 +40,7 @@ body {
     background-color: var(--color-light-bg);
 }
 
-.left-circle-bg {
+.login-left-circle-bg {
     /* Hacemos el círculo GIGANTE */
     width: 149vh;
     height: 150vh;
@@ -62,7 +62,7 @@ body {
     justify-content: flex-end; /* Alinea el contenido al borde derecho del círculo */
 }
 
-.character-image {
+.login-character-image {
     position: absolute;
     width: 36%; /* Ajusta el tamaño del camaleón */
     height: auto;
@@ -75,7 +75,7 @@ body {
 /* ================================
    SECCIÓN DERECHA
 ================================ */
-.right-section {
+.login-right-section {
     width: 55%;
     display: flex;
     align-items: center;
@@ -87,7 +87,7 @@ body {
     padding: 60px 80px;  /* reducido */
     border-radius: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 260px;        /* reducido */
+    width: 400px;        /* reducido */
     max-width: 450px;
     height: auto;
     text-align: center;
@@ -96,7 +96,7 @@ body {
 }
 
 /* 1. Ajuste del Contenedor: Aseguramos que la posición sea la correcta */
-.top-logo-container {
+.login-top-logo-container {
     position: fixed; /* O absolute relativo a .login-page */
     top: 1px;
     right: 5px;
@@ -104,23 +104,23 @@ body {
 }
 
 /* 2. ESTILO CLAVE: Reducir el tamaño de la imagen/ícono */
-.lumina-icon {
+.login-lumina-icon {
     width: 80px; /* Un poco más grande según la imagen */
     height: auto;
 }
 
-.cbta-logo {
+.login-cbta-logo {
     width: 110px;
     margin-bottom: 20px;
 }
 
-.welcome-text {
+.login-welcome-text {
     font-size: 1.2em;    /* reducido */
     margin-bottom: 5px;
     color: var(--color-text);
 }
 
-.session-text {
+.login-session-text {
     font-size: 1.6em;    /* reducido */
     font-weight: bold;
     margin-top: 0;
@@ -129,19 +129,19 @@ body {
 }
 
 /* INPUTS */
-.input-group {
+.login-input-group {
     text-align: left;
     margin-bottom: 20px; /* reducido */
 }
 
-.input-group label {
+.login-input-group label {
     display: block;
     font-weight: bold;
     color: var(--color-text);
     margin-bottom: 5px;
 }
 
-.input-group input {
+.login-input-group input {
     width: 100%;
     padding: 10px 0;
     border: none;
@@ -153,7 +153,7 @@ body {
     color: #808080;
 }
 
-.forgot-password {
+.login-forgot-password {
     display: block;
     text-align: right;
     font-size: 0.9em;
@@ -195,18 +195,18 @@ body {
         padding: 20px;
     }
 
-    .left-section {
+    .login-left-section {
         width: 100%;
         justify-content: center;
         padding: 0;
     }
 
-    .left-circle-bg {
+    .login-left-circle-bg {
         width: 40vw;
         height: 40vw;
     }
 
-    .right-section {
+    .login-right-section {
         width: 100%;
         justify-content: center;
         margin-top: 30px;
@@ -216,14 +216,14 @@ body {
 /* --- CELULAR --- */
 @media (max-width: 768px) {
 
-    .left-circle-bg {
+    .login-left-circle-bg {
         width: 55vw;
         height: 55vw;
         min-width: 220px;
         min-height: 220px;
     }
 
-    .character-image {
+    .login-character-image {
         width: 150%;
         left: -30px;
         transform: translateY(20%);
@@ -234,11 +234,11 @@ body {
         padding: 30px 20px;  /* más pequeño */
     }
 
-    .welcome-text {
+    .login-welcome-text {
         font-size: 1.1em;
     }
 
-    .session-text {
+    .login-session-text {
         font-size: 1.4em;
     }
 }
@@ -251,7 +251,7 @@ body {
         height: 65vw;
     }
 
-    .character-image {
+    .login-character-image {
         width: 160%;
     }
 
