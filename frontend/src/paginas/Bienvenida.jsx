@@ -1,9 +1,12 @@
 import React, { useState } from 'react'; // Agregamos useState aquí
 import '../plantillascss/Bienvenida.css';
+import RegistroAdministrador from './RegistroAdministrador'; //
 
 function Bienvenida({ alCerrarSesion }) {
     // Estado para controlar qué submenú se muestra al hacer hover
     const [submenuAbierto, setSubmenuAbierto] = useState(null);
+    // Estado para decidir qué mostrar en el contenido principal
+    const [vistaActual, setVistaActual] = useState('inicio');
 
     return (
         <div className="dashboard-container">
@@ -14,7 +17,8 @@ function Bienvenida({ alCerrarSesion }) {
 
                 <nav className="sidebar-nav">
                     {/* INICIO */}
-                    <div className="nav-item active">
+                    {/* Botón Inicio: Regresa a la vista inicial */}
+                    <div className="nav-item active" onClick={() => setVistaActual('inicio')}>
                         <img src="/hogar.png" className="sidebar-icon" alt="Inicio" />
                         <span>Inicio</span>
                     </div>
@@ -42,23 +46,22 @@ function Bienvenida({ alCerrarSesion }) {
                         )}
                     </div>
 
-                    {/* REGISTRAR */}
-                    <div
-                        className="nav-item"
-                        onMouseEnter={() => setSubmenuAbierto('registrar')}
-                        onMouseLeave={() => setSubmenuAbierto(null)}
-                    >
+                    {/* Menú Registrar */}
+                    <div className="nav-item"
+                         onMouseEnter={() => setSubmenuAbierto('registrar')}
+                         onMouseLeave={() => setSubmenuAbierto(null)}>
                         <img src="/agregar-usuario.png" className="sidebar-icon" alt="Registrar" />
                         <span>Registrar</span>
 
                         {submenuAbierto === 'registrar' && (
                             <div className="submenu-floating">
                                 <div className="submenu-item">
-                                    <img src="/agregar-usuario.png" className="sidebar-icon" alt="Alumno" />
+                                    <img src="/agregar-usuario.png" className="sidebar-icon" />
                                     <span>Alumno</span>
                                 </div>
-                                <div className="submenu-item">
-                                    <img src="/agregar-usuario.png" className="sidebar-icon" alt="Administrador" />
+                                {/* CLIC AQUÍ: Cambia la vista al formulario de Administrador */}
+                                <div className="submenu-item" onClick={() => setVistaActual('registro_admin')}>
+                                    <img src="/agregar-usuario.png" className="sidebar-icon" />
                                     <span>Administrador</span>
                                 </div>
                             </div>
@@ -97,22 +100,29 @@ function Bienvenida({ alCerrarSesion }) {
 
             <main className="main-content">
                 <div className="content-card">
-                    <header className="welcome-banner">
-                        <div className="camaleon-header">
-                            <img src="/camaleon3.png" alt="Camaleón" />
-                        </div>
-                        <div className="header-titles">
-                            <h1>B i e n v e n i d o</h1>
-                            <p>¿Qué vamos a hacer el día de hoy?</p>
-                        </div>
-                    </header>
+                    {/* RENDERIZADO CONDICIONAL */}
+                    {vistaActual === 'inicio' ? (
+                        <header className="welcome-banner">
+                            <div className="camaleon-header">
+                                <img src="/camaleon3.png" alt="Camaleón" />
+                            </div>
+                            <div className="header-titles">
+                                <h1>B i e n v e n i d o</h1>
+                                <p>¿Qué vamos a hacer el día de hoy?</p>
+                            </div>
+                        </header>
+                    ) : vistaActual === 'registro_admin' ? (
+                        <RegistroAdministrador alRegresar={() => setVistaActual('inicio')} />
+                    ) : null}
+
                     <div className="workspace">
-                        {/* Contenido dinámico aquí */}
+                        {/* Aquí puedes poner otros procesos si vistaActual cambia a otro valor */}
                     </div>
                 </div>
             </main>
         </div>
     );
 }
+
 
 export default Bienvenida;

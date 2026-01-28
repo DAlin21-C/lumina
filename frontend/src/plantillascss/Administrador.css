@@ -1,0 +1,80 @@
+.admin-register-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.admin-header-banner {
+    background-color: #abc472; /* Verde oliva claro */
+    width: 90%;
+    padding: 12px;
+    border-radius: 25px;
+    text-align: center;
+    border: 2px solid #7a8d4c;
+    margin-bottom: 25px;
+}
+
+.admin-header-banner h2 {
+    color: #435127;
+    letter-spacing: 6px;
+    margin: 0;
+}
+
+.admin-content-body {
+    display: flex;
+    width: 95%;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.inputs-card-cream {
+    background-color: #FFFADB; /* Fondo crema de la imagen */
+    padding: 40px;
+    border-radius: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.oval-field {
+    width: 350px;
+    padding: 12px 25px;
+    border-radius: 30px; /* Campos ovalados */
+    border: 1.5px solid #888888;
+    color: #808080;
+    background: transparent;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace; /* Tipografía estilo máquina de escribir */
+    font-size: medium;
+}
+
+.mascot-img-large {
+    width: 280px;
+    margin-bottom: 30px;
+}
+
+.form-action-buttons {
+    display: flex;
+    gap: 25px;
+}
+
+.btn-confirm {
+    background-color: #1d4d40;
+    color: white;
+    border: none;
+    padding: 12px 35px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-cancel {
+    background-color: #ffae42; /* Color naranja de la imagen */
+    color: white;
+    border: none;
+    padding: 12px 35px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
