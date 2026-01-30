@@ -1,0 +1,115 @@
+.registro-alumno-full-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+
+/* Título en Óvalo Verde */
+.titulo-ovalado-verde {
+    background-color: #abc472; /* Verde oliva claro */
+    width: 90%;
+    padding: 12px;
+    border-radius: 25px; /* Hace que sea un óvalo perfecto */
+    text-align: center;
+    border: 2px solid #7a8d4c;
+    margin-bottom: 25px;
+}
+
+.titulo-ovalado-verde h2 {
+    color: #435127;
+    letter-spacing: 6px;
+    margin: 0;
+    text-transform: none;
+}
+
+.registro-alumno-layout {
+    display: flex;
+    width: 95%;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/* Tarjeta de Formulario */
+.tarjeta-formulario-crema {
+    background-color: #FFFADB;
+    padding: 40px 50px;
+    border-radius: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-right: 20px;
+}
+
+.input-ovalado{
+    width: 350px;
+    padding: 12px 25px;
+    border-radius: 30px;
+    border: 1.5px solid #888888;
+    color: #808080;
+    background: transparent;
+    text-align: center;
+    font-size: 1rem;
+    font-family: 'Courier New', Courier, monospace; /* Tipografía estilo máquina de escribir */
+    font-size: medium;
+    outline: none;
+}
+
+/* Panel Derecho */
+.panel-derecho-barcode {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.contenedor-barcode {
+    text-align: center;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.barcode-img {
+    width: 220px;
+}
+
+.btn-generar-negro {
+    margin-top: 50px;
+    background-color: #0d332a; /* Verde muy oscuro casi negro */
+    color: white;
+    padding: 15px 40px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.botones-inferiores {
+    margin-top: 50px;
+    display: flex;
+    gap: 20px;
+}
+
+.btn-registrar-verde {
+    background-color: #1d4d40;
+    color: white;
+    padding: 12px 40px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-regresar-naranja {
+    background-color: #f7b052; /* Color naranja de la imagen */
+    color: white;
+    padding: 12px 40px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+---------------

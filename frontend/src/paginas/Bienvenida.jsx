@@ -1,6 +1,7 @@
 import React, { useState } from 'react'; // Agregamos useState aquí
 import '../plantillascss/Bienvenida.css';
 import RegistroAdministrador from './RegistroAdministrador'; //
+import RegistrarAlumno from "./RegistrarAlumno";
 
 function Bienvenida({ alCerrarSesion }) {
     // Estado para controlar qué submenú se muestra al hacer hover
@@ -55,11 +56,11 @@ function Bienvenida({ alCerrarSesion }) {
 
                         {submenuAbierto === 'registrar' && (
                             <div className="submenu-floating">
-                                <div className="submenu-item">
+                                {/* 2. Clic en Alumno cambia la vista */}
+                                <div className="submenu-item" onClick={() => setVistaActual('registro_alumno')}>
                                     <img src="/agregar-usuario.png" className="sidebar-icon" />
                                     <span>Alumno</span>
                                 </div>
-                                {/* CLIC AQUÍ: Cambia la vista al formulario de Administrador */}
                                 <div className="submenu-item" onClick={() => setVistaActual('registro_admin')}>
                                     <img src="/agregar-usuario.png" className="sidebar-icon" />
                                     <span>Administrador</span>
@@ -100,8 +101,8 @@ function Bienvenida({ alCerrarSesion }) {
 
             <main className="main-content">
                 <div className="content-card">
-                    {/* RENDERIZADO CONDICIONAL */}
-                    {vistaActual === 'inicio' ? (
+                    {/* 3. Lógica de Renderizado Condicional Mejorada */}
+                    {vistaActual === 'inicio' && (
                         <header className="welcome-banner">
                             <div className="camaleon-header">
                                 <img src="/camaleon3.png" alt="Camaleón" />
@@ -111,18 +112,22 @@ function Bienvenida({ alCerrarSesion }) {
                                 <p>¿Qué vamos a hacer el día de hoy?</p>
                             </div>
                         </header>
-                    ) : vistaActual === 'registro_admin' ? (
-                        <RegistroAdministrador alRegresar={() => setVistaActual('inicio')} />
-                    ) : null}
+                    )}
 
+                    {/* Espacio donde se cargan los formularios */}
                     <div className="workspace">
-                        {/* Aquí puedes poner otros procesos si vistaActual cambia a otro valor */}
+                        {vistaActual === 'registro_admin' && (
+                            <RegistroAdministrador alRegresar={() => setVistaActual('inicio')} />
+                        )}
+
+                        {vistaActual === 'registro_alumno' && (
+                            <RegistrarAlumno alRegresar={() => setVistaActual('inicio')} />
+                        )}
                     </div>
                 </div>
             </main>
         </div>
     );
 }
-
 
 export default Bienvenida;
