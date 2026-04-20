@@ -7,12 +7,13 @@ import Bienvenida from "./paginas/Bienvenida.jsx";
 import RegistroAdministrador from "./paginas/RegistroAdministrador.jsx";
 import RegistrarAlumno from "./paginas/RegistrarAlumno.jsx";
 import Modificaciones from "./paginas/Modificaciones.jsx";
+import ListaAsistencia from "./paginas/ListaAsistencia.jsx"
 
 function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Modificaciones/>} />
+                <Route path="/" element={<Bienvenida/>} />
             </Routes>
         </BrowserRouter>
     );

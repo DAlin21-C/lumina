@@ -1,0 +1,152 @@
+/* Contenedor Principal */
+.contenedor-principal-listas {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #e5f2cf; /* O el color de fondo de tu app */
+    color: black;
+}
+
+.header-listas {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Banner Ovalado */
+.titulo-ovalado-verde {
+    background-color: #435127;
+    color: white;
+
+    padding: 10px 40px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.banner-titulo-ajustado h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+/* Buscador */
+.search-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.search-container {
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.search-input {
+    width: 250px;
+    padding: 10px 15px 10px 45px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    background-color: rgba(255, 255, 255, 0.8);
+    outline: none;
+}
+
+/* Grid de Tarjetas */
+.grid-contenedor-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    width: 95%;
+    max-height: 60vh;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+/* Tarjeta Crema Estilo Lumina */
+.tarjeta-clase {
+    background-color: #fffbe6; /* Color cremita */
+    border-radius: 15px;
+    padding: 20px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 90px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border: 1px solid #e0dcc5;
+}
+
+.texto-tarjeta {
+    display: flex;
+    flex-direction: column;
+}
+
+.grado-grupo {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.especialidad-texto {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 4px;
+}
+
+/* Botones de Acción dentro de tarjeta */
+.acciones-verticales {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-accion {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.btn-accion:hover {
+    transform: scale(1.2);
+}
+
+/* Botón Regresar Lumina */
+.btn-regresar-naranja {
+    background-color: #d97706;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 25px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.sin-resultados {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+    color: #435127;
+    font-style: italic;
+}
+
+.btn-descarga{
+    background-color: #fffbe6;
+}
+
+.btn-vista{
+    background-color: #fffbe6;
+}

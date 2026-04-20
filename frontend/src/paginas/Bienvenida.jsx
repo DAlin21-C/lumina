@@ -2,6 +2,7 @@ import React, { useState } from 'react'; // Agregamos useState aquí
 import '../plantillascss/Bienvenida.css';
 import RegistroAdministrador from './RegistroAdministrador'; //
 import RegistrarAlumno from "./RegistrarAlumno";
+import ListaAsistencia from "./ListaAsistencia.jsx";
 
 function Bienvenida({ alCerrarSesion }) {
     // Estado para controlar qué submenú se muestra al hacer hover
@@ -84,7 +85,8 @@ function Bienvenida({ alCerrarSesion }) {
                                     <img src="/descripcion-general.png" className="sidebar-icon" alt="Datos" />
                                     <span>Datos</span>
                                 </div>
-                                <div className="submenu-item">
+                                {/* CAMBIO: Aseguramos que el onClick cambie a la vista 'lista_asistencia' */}
+                                <div className="submenu-item" onClick={() => setVistaActual('lista_asistencia')}>
                                     <img src="/descripcion-general.png" className="sidebar-icon" alt="Asistencia" />
                                     <span>Asistencia</span>
                                 </div>
@@ -122,6 +124,10 @@ function Bienvenida({ alCerrarSesion }) {
 
                         {vistaActual === 'registro_alumno' && (
                             <RegistrarAlumno alRegresar={() => setVistaActual('inicio')} />
+                        )}
+
+                        {vistaActual === 'lista_asistencia' && (
+                            <ListaAsistencia alRegresar={() => setVistaActual('inicio')} />
                         )}
                     </div>
                 </div>
