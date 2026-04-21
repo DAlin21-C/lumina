@@ -1,0 +1,74 @@
+/* Contenedor Principal */
+.contenedor-principal-listas {
+    padding: 20px;
+    height: 100%;
+}
+
+/* Modal Estilo Excel */
+.modal-excel-grande {
+    width: 95% !important;
+    max-width: 1200px !important;
+    border: 2px solid #217346; /* Verde institucional Excel */
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.scroll-excel {
+    overflow: auto;
+    max-height: 75vh;
+    background-color: #e1e1e1; /* Fondo de bordes Excel */
+    padding: 0 !important;
+}
+
+/* Tabla de Datos */
+.tabla-previa-excel {
+    border-collapse: collapse;
+    width: max-content; /* Permite scroll horizontal si es ancha */
+    min-width: 100%;
+    background-color: white;
+}
+
+/* Índices (A, B, C y 1, 2, 3) */
+.excel-header-index, .excel-header-col, .excel-row-index {
+    background-color: #f3f3f3;
+    border: 1px solid #c0c0c0;
+    color: #666;
+    font-size: 12px;
+    text-align: center;
+    font-weight: normal;
+}
+
+.excel-header-col {
+    padding: 5px 20px;
+    min-width: 120px;
+}
+
+.excel-row-index {
+    width: 40px;
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background-color: #f3f3f3;
+}
+
+/* Celdas de contenido */
+.excel-cell {
+    border: 1px solid #d4d4d4;
+    padding: 8px 12px;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.tabla-previa-excel tr:hover .excel-cell {
+    background-color: #ebf1f1;
+}
+
+/* Loader */
+.loader {
+    padding: 50px;
+    text-align: center;
+    font-weight: bold;
+    color: #217346;
+}

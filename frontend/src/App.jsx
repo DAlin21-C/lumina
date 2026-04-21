@@ -8,6 +8,7 @@ import RegistroAdministrador from "./paginas/RegistroAdministrador.jsx";
 import RegistrarAlumno from "./paginas/RegistrarAlumno.jsx";
 import Modificaciones from "./paginas/Modificaciones.jsx";
 import ListaAsistencia from "./paginas/ListaAsistencia.jsx"
+import ListaDatos from "./paginas/ListaDatos.jsx";
 
 function App() {
     return (

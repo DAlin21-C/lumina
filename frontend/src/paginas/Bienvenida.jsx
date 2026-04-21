@@ -3,6 +3,7 @@ import '../plantillascss/Bienvenida.css';
 import RegistroAdministrador from './RegistroAdministrador'; //
 import RegistrarAlumno from "./RegistrarAlumno";
 import ListaAsistencia from "./ListaAsistencia.jsx";
+import ListaDatos from "./ListaDatos.jsx";
 
 function Bienvenida({ alCerrarSesion }) {
     // Estado para controlar qué submenú se muestra al hacer hover
@@ -81,7 +82,7 @@ function Bienvenida({ alCerrarSesion }) {
 
                         {submenuAbierto === 'listas' && (
                             <div className="submenu-floating">
-                                <div className="submenu-item">
+                                <div className="submenu-item" onClick={() => setVistaActual('lista_datos')}>
                                     <img src="/descripcion-general.png" className="sidebar-icon" alt="Datos" />
                                     <span>Datos</span>
                                 </div>
@@ -128,6 +129,9 @@ function Bienvenida({ alCerrarSesion }) {
 
                         {vistaActual === 'lista_asistencia' && (
                             <ListaAsistencia alRegresar={() => setVistaActual('inicio')} />
+                        )}
+                        {vistaActual === 'lista_datos' && (
+                            <ListaDatos alRegresar={() => setVistaActual('inicio')} />
                         )}
                     </div>
                 </div>
