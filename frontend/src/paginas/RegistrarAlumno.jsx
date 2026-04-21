@@ -7,7 +7,7 @@ function RegistrarAlumno({ alRegresar }) {
     return (
         <div className="registro-alumno-full-container">
             {/* Título en Óvalo Verde */}
-            <div className="titulo-ovalado-verde">
+            <div className="titulo-ovalado-verde_h">
                 <h2>Registrar Alumno</h2>
             </div>
 

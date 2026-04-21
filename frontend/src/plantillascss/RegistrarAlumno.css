@@ -6,22 +6,21 @@
     padding-top: 20px;
 }
 
-/* Título en Óvalo Verde */
-.titulo-ovalado-verde {
+/* El Óvalo del Título */
+.titulo-ovalado-verde_h {
     background-color: #abc472; /* Verde oliva claro */
     width: 90%;
     padding: 12px;
-    border-radius: 25px; /* Hace que sea un óvalo perfecto */
+    border-radius: 25px;
     text-align: center;
     border: 2px solid #7a8d4c;
     margin-bottom: 25px;
 }
 
-.titulo-ovalado-verde h2 {
+.titulo-ovalado-verde_h h2 {
     color: #435127;
     letter-spacing: 6px;
     margin: 0;
-    text-transform: none;
 }
 
 .registro-alumno-layout {

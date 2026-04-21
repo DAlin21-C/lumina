@@ -18,23 +18,6 @@
     margin-bottom: 20px;
 }
 
-/* Banner Ovalado */
-.titulo-ovalado-verde {
-    background-color: #435127;
-    color: white;
-
-    padding: 10px 40px;
-    border-radius: 50px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-.banner-titulo-ajustado h2 {
-    margin: 0;
-    font-size: 1.5rem;
-}
 
 /* Buscador */
 .search-wrapper {
