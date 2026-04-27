@@ -6,9 +6,8 @@
     padding-top: 20px;
 }
 
-/* El Óvalo del Título */
 .titulo-ovalado-verde_h {
-    background-color: #abc472; /* Verde oliva claro */
+    background-color: #abc472;
     width: 90%;
     padding: 12px;
     border-radius: 25px;
@@ -30,7 +29,7 @@
     align-items: center;
 }
 
-/* Tarjeta de Formulario */
+/* IMPORTANTE: overflow visible para que el menú no se corte */
 .tarjeta-formulario-crema {
     background-color: #FFFADB;
     padding: 40px 50px;
@@ -39,23 +38,102 @@
     flex-direction: column;
     gap: 15px;
     margin-right: 20px;
+    overflow: visible !important;
 }
 
-.input-ovalado{
+.input-ovalado {
     width: 350px;
     padding: 12px 25px;
     border-radius: 30px;
     border: 1.5px solid #888888;
-    color: #808080;
+    color: #435127;
     background: transparent;
     text-align: center;
-    font-size: 1rem;
-    font-family: 'Courier New', Courier, monospace; /* Tipografía estilo máquina de escribir */
+    font-family: 'Courier New', Courier, monospace;
     font-size: medium;
     outline: none;
+    box-sizing: border-box;
 }
 
-/* Panel Derecho */
+/* ESTILOS SELECT PERSONALIZADO */
+.custom-select-container {
+    position: relative;
+    width: 350px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.select-disparador {
+    width: 100%;
+    padding: 12px 25px;
+    border-radius: 30px;
+    border: 1.5px solid #888888;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.select-disparador.activo {
+    border-color: #7a8d4c;
+    background-color: rgba(171, 196, 114, 0.1);
+}
+
+.texto-placeholder { color: #808080; }
+.texto-seleccionado { color: #435127; font-weight: bold; }
+
+.icono-flecha-select {
+    position: absolute;
+    right: 20px;
+    color: #888888;
+    transition: transform 0.3s ease;
+}
+
+.icono-flecha-select.girar { transform: rotate(180deg); color: #7a8d4c; }
+
+/* SUBMENU DESPLEGABLE */
+.lista-opciones-redondeada {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    background-color: #FFFADB;
+    border: 2px solid #7a8d4c;
+    border-radius: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    z-index: 9999;
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+
+.posicion-abajo { top: 110%; }
+.posicion-arriba { bottom: 110%; }
+
+.lista-opciones-redondeada li {
+    padding: 12px 20px;
+    text-align: center;
+    color: #435127;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(122, 141, 76, 0.3); /* BORDES EN OPCIONES */
+    transition: all 0.2s;
+}
+
+.lista-opciones-redondeada li:last-child { border-bottom: none; }
+
+.lista-opciones-redondeada li:hover {
+    background-color: #abc472;
+    color: white;
+}
+
+.lista-opciones-redondeada li.opcion-activa {
+    background-color: #7a8d4c;
+    color: white;
+}
+
+/* PANEL DERECHO Y BOTONES */
 .panel-derecho-barcode {
     display: flex;
     flex-direction: column;
@@ -70,13 +148,11 @@
     border-radius: 10px;
 }
 
-.barcode-img {
-    width: 220px;
-}
+.barcode-img { width: 220px; }
 
 .btn-generar-negro {
     margin-top: 50px;
-    background-color: #0d332a; /* Verde muy oscuro casi negro */
+    background-color: #0d332a;
     color: white;
     padding: 15px 40px;
     border-radius: 30px;
@@ -102,7 +178,7 @@
 }
 
 .btn-regresar-naranja {
-    background-color: #f7b052; /* Color naranja de la imagen */
+    background-color: #f7b052;
     color: white;
     padding: 12px 40px;
     border-radius: 25px;
@@ -110,5 +186,3 @@
     cursor: pointer;
     font-weight: bold;
 }
-
----------------

@@ -1,74 +1,257 @@
-/* Contenedor Principal */
-.contenedor-principal-listas {
-    padding: 20px;
-    height: 100%;
+:root {
+    --verde-primario: #abc472;
+    --verde-oscuro: #435127;
+    --verde-fondo-tarjeta: #f4f9e8; /* Verde claro que armoniza con el fondo */
+    --verde-hover: #dce7c1;
 }
 
-/* Modal Estilo Excel */
-.modal-excel-grande {
-    width: 95% !important;
-    max-width: 1200px !important;
-    border: 2px solid #217346; /* Verde institucional Excel */
+.lista-datos-container {
+    padding: 30px;
+    background-color: transparent;
+}
+
+/* Header y Título */
+.header-seccion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.titulo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--verde-oscuro);
+}
+
+/* 🔹 BUSCADOR CORREGIDO (Sin sombras oscuras) */
+.search-bar-modern {
+    background: white;
+    border: 2px solid var(--verde-primario);
+    border-radius: 50px;
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 320px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.search-bar-modern input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 0.95rem;
+    color: var(--verde-oscuro);
+    background: transparent; /* Asegura que no haya fondos extraños */
+}
+
+/* Placeholder con color suave */
+.search-bar-modern input::placeholder {
+    color: #999;
+}
+
+/* 🔹 TARJETAS VERDES QUE COMBINAN */
+.grid-tarjetas-compactas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.card-mini {
+    background: var(--verde-fondo-tarjeta);
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--verde-primario);
+    transition: all 0.3s ease;
+}
+
+.card-mini:hover {
+    transform: translateY(-3px);
+    background: var(--verde-hover);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.badge-grado {
+    background: white;
+    color: var(--verde-oscuro);
+    padding: 5px 12px;
     border-radius: 8px;
-    overflow: hidden;
+    font-weight: bold;
+    font-size: 0.9rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.txt-especialidad {
+    margin: 8px 0 0 0;
+    font-size: 0.9rem;
+    color: var(--verde-oscuro);
+    font-weight: 500;
+}
+
+/* 🔹 BOTÓN DE OJO ESTILIZADO */
+.btn-view-only {
+    background: white;
+    color: var(--verde-oscuro);
+    border: 2px solid var(--verde-primario);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.btn-view-only:hover {
+    background: var(--verde-oscuro);
+    color: white;
+    border-color: var(--verde-oscuro);
+}
+
+/* MODAL OVERLAY - El fondo oscuro que bloquea lo de atrás */
+.modal-overlay-modern {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo oscuro semitransparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Muy alto para que nada lo tape */
+    backdrop-filter: blur(4px);
+}
+
+/* CONTENEDOR DEL MODAL */
+.modal-content-excel {
+    background-color: #ffffff; /* Fondo blanco sólido */
+    width: 90%;
+    max-width: 1100px;
+    height: 80vh;
+    border-radius: 12px;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    overflow: hidden;
 }
 
-.scroll-excel {
-    overflow: auto;
-    max-height: 75vh;
-    background-color: #e1e1e1; /* Fondo de bordes Excel */
-    padding: 0 !important;
+/* CABECERA */
+.modal-header-excel {
+    background-color: #5A734D; /* Tu verde oscuro */
+    color: white;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* Tabla de Datos */
-.tabla-previa-excel {
-    border-collapse: collapse;
-    width: max-content; /* Permite scroll horizontal si es ancha */
+.header-info { display: flex; align-items: center; }
+.header-info h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: white; /* Pon aquí el color que desees */
+}
+
+.close-x {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+/* CUERPO DEL EXCEL */
+.modal-body-excel {
+    flex: 1;
+    overflow: auto; /* Scroll para tablas grandes */
+    padding: 10px;
+}
+
+.excel-table-wrapper {
+    background-color: solid var(--verde-primario);
+    display: inline-block;
     min-width: 100%;
-    background-color: white;
+    border: 1px solid #ccc;
 }
 
-/* Índices (A, B, C y 1, 2, 3) */
-.excel-header-index, .excel-header-col, .excel-row-index {
-    background-color: #f3f3f3;
-    border: 1px solid #c0c0c0;
-    color: #666;
-    font-size: 12px;
-    text-align: center;
-    font-weight: normal;
+.excel-table-view {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: sans-serif;
+    font-size: 0.85rem;
 }
 
-.excel-header-col {
-    padding: 5px 20px;
-    min-width: 120px;
-}
-
-.excel-row-index {
-    width: 40px;
-    position: sticky;
-    left: 0;
-    z-index: 2;
-    background-color: #f3f3f3;
-}
-
-/* Celdas de contenido */
-.excel-cell {
+.excel-table-view th, .excel-table-view td {
     border: 1px solid #d4d4d4;
-    padding: 8px 12px;
-    font-size: 13px;
+    padding: 6px 12px;
+    min-width: 100px;
     white-space: nowrap;
+    color: black;
 }
 
-.tabla-previa-excel tr:hover .excel-cell {
-    background-color: #ebf1f1;
-}
-
-/* Loader */
-.loader {
-    padding: 50px;
+/* Estilo de encabezados A, B, C... */
+.excel-col-letter, .excel-row-num, .excel-idx {
+    background-color: #e9e9e9;
+    color: #666;
+    font-weight: normal;
     text-align: center;
-    font-weight: bold;
-    color: #217346;
 }
+
+.excel-row-num { width: 40px; }
+
+/* PIE DE PÁGINA (BOTÓN DESCARGAR) */
+.modal-footer-excel {
+    padding: 15px 25px;
+    background-color: #ffffff;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-descargar-excel {
+    background-color: #abc472; /* Tu verde primario */
+    color: #435127;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+}
+
+.btn-descargar-excel:hover {
+    background-color: #435127;
+    color: white;
+}
+
+/* SPINNER */
+.spinner-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(0,0,0,0.1);
+    border-top: 4px solid #abc472;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }

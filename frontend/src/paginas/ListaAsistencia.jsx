@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import '../plantillascss/ListaAsistencia.css';
+import { LuEye, LuFileDown } from "react-icons/lu";
+import { FiSearch } from "react-icons/fi";
 
 function ListaAsistencia() {
-
     // 🔹 Buscador
     const [busqueda, setBusqueda] = useState("");
 
@@ -13,15 +14,15 @@ function ListaAsistencia() {
 
     // 🔹 Datos
     const [grupos] = useState([
-        { grado: "1", grupo: "A", especialidad: "", pdf: "/pdf/pdf1.pdf" },
-        { grado: "3", grupo: "A", especialidad: "Agropecuario", pdf: "/pdfs/lista2.pdf" },
-        { grado: "5", grupo: "A", especialidad: "Programación", pdf: "/pdfs/lista3.pdf" },
-        { grado: "5", grupo: "A", especialidad: "Sist.P.Pecuario", pdf: "/pdfs/lista4.pdf" },
-        { grado: "3", grupo: "A", especialidad: "Ofimatica", pdf: "/pdfs/lista5.pdf" },
-        { grado: "1", grupo: "F", especialidad: "", pdf: "/pdfs/lista6.pdf" },
-        { grado: "3", grupo: "A", especialidad: "Programación", pdf: "/pdfs/lista7.pdf" },
-        { grado: "5", grupo: "A", especialidad: "Contabilidad", pdf: "/pdfs/lista8.pdf" },
-        { grado: "3", grupo: "A", especialidad: "Agropecuario", pdf: "/pdfs/lista9.pdf" },
+        { id: 1, grado: "1", grupo: "A", especialidad: "General", pdf: "/pdf/pdf1.pdf" },
+        { id: 2, grado: "3", grupo: "A", especialidad: "Agropecuario", pdf: "/pdf/pdf1.pdf" },
+        { id: 3, grado: "5", grupo: "A", especialidad: "Programación", pdf: "/pdf/pdf1.pdf" },
+        { id: 4, grado: "5", grupo: "A", especialidad: "Sist.P.Pecuario", pdf: "/pdf/pdf1.pdf" },
+        { id: 5, grado: "3", grupo: "A", especialidad: "Ofimatica", pdf: "/pdf/pdf1.pdf" },
+        { id: 6, grado: "1", grupo: "F", especialidad: "General", pdf: "/pdf/pdf1.pdf" },
+        { id: 7, grado: "3", grupo: "A", especialidad: "Programación", pdf: "/pdf/pdf1.pdf" },
+        { id: 8, grado: "5", grupo: "A", especialidad: "Contabilidad", pdf: "/pdf/pdf1.pdf" },
+        { id: 9, grado: "3", grupo: "A", especialidad: "Agropecuario", pdf: "/pdf/pdf1.pdf" },
     ]);
 
     // 🔹 Filtro
@@ -35,9 +36,9 @@ function ListaAsistencia() {
     });
 
     // 🔹 Abrir PDF
-    const abrirPDF = (rutaPDF, nombre) => {
-        setPdfSeleccionado(rutaPDF);
-        setPdfSeleccionadoNombre(nombre);
+    const abrirPDF = (item) => {
+        setPdfSeleccionado(item.pdf);
+        setPdfSeleccionadoNombre(`${item.grado}° ${item.grupo} - ${item.especialidad}`);
         setMostrarModal(true);
     };
 
@@ -65,63 +66,45 @@ function ListaAsistencia() {
                     <h2>📂 Listas de Asistencia</h2>
                 </div>
 
-                <div className="search-wrapper">
-                    <div className="search-container">
-                        <span className="search-icon">🔍</span>
-                        <input
-                            type="text"
-                            placeholder="Buscar"
-                            className="search-input"
-                            value={busqueda}
-                            onChange={(e) => setBusqueda(e.target.value)}
-                        />
-                    </div>
+                <div className="search-container">
+                    <FiSearch className="search-icon" />
+                    <input
+                        type="text"
+                        placeholder="Buscar por grado o carrera..."
+                        className="search-input"
+                        value={busqueda}
+                        onChange={(e) => setBusqueda(e.target.value)}
+                    />
                 </div>
             </header>
 
-            {/* 🔹 TARJETAS */}
+            {/* 🔹 GRID DE TARJETAS */}
             <div className="grid-contenedor-tarjetas">
                 {gruposFiltrados.length > 0 ? (
                     gruposFiltrados.map((item, index) => (
-                        <div className="tarjeta-clase" key={index}>
-
-                            <div className="espaciador-izquierdo"></div>
-
+                        // ... dentro del map de gruposFiltrados
+                        <div className="tarjeta-clase" key={item.id || index}>
                             <div className="texto-tarjeta">
-                                <span className="grado-grupo">
-                                    {item.grado} "{item.grupo}"
-                                </span>
-
-                                {item.especialidad && (
-                                    <span className="especialidad-texto">
-                                        {item.especialidad}
-                                    </span>
-                                )}
+                                <span className="badge-grado">{item.grado}° {item.grupo}</span>
+                                <span className="especialidad-texto">{item.especialidad || "General"}</span>
                             </div>
 
-                            <div className="acciones-verticales">
-
-                                {/* 👁️ VER */}
+                            <div className="acciones-horizontales">
                                 <button
-                                    className="btn-vista"
-                                    onClick={() =>
-                                        abrirPDF(
-                                            item.pdf,
-                                            `${item.grado} "${item.grupo}" - ${item.especialidad || "General"}`
-                                        )
-                                    }
+                                    className="btn-accion-mini btn-vista-verde"
+                                    onClick={() => abrirPDF(item)}
+                                    title="Visualizar"
                                 >
-                                    👁️
+                                    <LuEye className="icon-embed" />
                                 </button>
 
-                                {/* 📥 DESCARGAR */}
                                 <button
-                                    className="btn-descarga"
+                                    className="btn-accion-mini btn-descarga-verde"
                                     onClick={() => descargarPDF(item.pdf)}
+                                    title="Descargar"
                                 >
-                                    📥
+                                    <LuFileDown className="icon-embed" />
                                 </button>
-
                             </div>
                         </div>
                     ))
@@ -134,62 +117,33 @@ function ListaAsistencia() {
 
             {/* 🔥 MODAL VISOR PDF */}
             {mostrarModal && (
-                <div className="modal-overlay">
-                    <div className="modal-box">
-
-                        {/* HEADER */}
+                <div className="modal-overlay" onClick={cerrarModal}>
+                    <div className="modal-box" onClick={(e) => e.stopPropagation()}>
                         <div className="modal-header">
-                            <span>
-                                Lista de Asistencia - {pdfSeleccionadoNombre}
-                            </span>
-
-                            <button className="btn-cerrar-x" onClick={cerrarModal}>
-                                ✕
-                            </button>
+                            <span>{pdfSeleccionadoNombre}</span>
+                            <button className="btn-cerrar-x" onClick={cerrarModal}>✕</button>
                         </div>
 
-                        {/* BODY */}
                         <div className="modal-body">
-
                             <iframe
                                 src={pdfSeleccionado}
                                 className="visor-pdf"
-                                title="PDF"
+                                title="PDF Viewer"
                             ></iframe>
-
-                            <div className="fallback">
-                                <p>Tu navegador no puede mostrar PDFs embebidos.</p>
-
-                                <button
-                                    className="btn-abrir"
-                                    onClick={() => window.open(pdfSeleccionado, "_blank")}
-                                >
-                                    👁️ Abrir PDF en nueva pestaña
-                                </button>
-                            </div>
-
                         </div>
 
-                        {/* FOOTER */}
                         <div className="modal-footer">
-
-                            <button className="btn-cerrar" onClick={cerrarModal}>
-                                Cerrar
-                            </button>
-
+                            <button className="btn-cerrar" onClick={cerrarModal}>Cerrar</button>
                             <button
-                                className="btn-descargar"
+                                className="btn-descargar-verde-footer"
                                 onClick={() => descargarPDF(pdfSeleccionado)}
                             >
-                                ⬇ Descargar PDF
+                                <LuFileDown style={{marginRight: '8px'}}/> Descargar PDF
                             </button>
-
                         </div>
-
                     </div>
                 </div>
             )}
-
         </div>
     );
 }

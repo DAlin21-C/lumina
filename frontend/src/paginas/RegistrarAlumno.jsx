@@ -1,65 +1,105 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import '../plantillascss/RegistrarAlumno.css';
+import { LuChevronDown } from "react-icons/lu";
+
+// Componente Interno para el Select Personalizado
+function CustomSelect({ label, opciones, alCambiar, valor }) {
+    const [abierto, setAbierto] = useState(false);
+    const [subir, setSubir] = useState(false);
+    const contenedorRef = useRef(null);
+
+    // Detectar si el menú debe abrirse hacia arriba o hacia abajo
+    useEffect(() => {
+        if (abierto && contenedorRef.current) {
+            const rect = contenedorRef.current.getBoundingClientRect();
+            const espacioDebajo = window.innerHeight - rect.bottom;
+            // Si hay menos de 250px de espacio abajo, se abre hacia arriba
+            setSubir(espacioDebajo < 250);
+        }
+    }, [abierto]);
+
+    return (
+        <div className="custom-select-container" ref={contenedorRef}>
+            <div
+                className={`select-disparador ${abierto ? 'activo' : ''}`}
+                onClick={() => setAbierto(!abierto)}
+                onBlur={() => setTimeout(() => setAbierto(false), 200)}
+                tabIndex="0"
+            >
+                <span className={valor ? 'texto-seleccionado' : 'texto-placeholder'}>
+                    {valor || label}
+                </span>
+                <LuChevronDown className={`icono-flecha-select ${abierto ? 'girar' : ''}`} />
+            </div>
+
+            {abierto && (
+                <ul className={`lista-opciones-redondeada ${subir ? 'posicion-arriba' : 'posicion-abajo'}`}>
+                    {opciones.map((opt) => (
+                        <li
+                            key={opt}
+                            onClick={() => { alCambiar(opt); setAbierto(false); }}
+                            className={valor === opt ? 'opcion-activa' : ''}
+                        >
+                            {opt}
+                        </li>
+                    ))}
+                </ul>
+            )}
+        </div>
+    );
+}
 
 function RegistrarAlumno({ alRegresar }) {
     const [codigo, setCodigo] = useState("012345678");
 
+    // Estados para el formulario
+    const [especialidad, setEspecialidad] = useState("");
+    const [grado, setGrado] = useState("");
+    const [grupo, setGrupo] = useState("");
+
     return (
         <div className="registro-alumno-full-container">
-            {/* Título en Óvalo Verde */}
             <div className="titulo-ovalado-verde_h">
                 <h2>Registrar Alumno</h2>
             </div>
 
             <div className="registro-alumno-layout">
-                {/* Panel Izquierdo: Formulario */}
                 <div className="tarjeta-formulario-crema">
                     <input type="text" placeholder="Numero de control" className="input-ovalado" />
                     <input type="text" placeholder="Nombre" className="input-ovalado" />
                     <input type="text" placeholder="Apellido Paterno" className="input-ovalado" />
                     <input type="text" placeholder="Apellido Materno" className="input-ovalado" />
 
-                    <select className="input-ovalado select-flecha">
-                        <option value="" disabled selected>Especialidad</option>
-                        <option value="programacion">Programación</option>
-                        <option value="programacion">Ofimatica</option>
-                        <option value="programacion">SPP</option>
-                        <option value="programacion">Agropecuario</option>
-                        <option value="programacion">Contabilidad</option>
-                    </select>
+                    <CustomSelect
+                        label="Especialidad"
+                        opciones={["Programación", "Ofimática", "SPP", "Agropecuario", "Contabilidad"]}
+                        valor={especialidad}
+                        alCambiar={setEspecialidad}
+                    />
 
-                    <select className="input-ovalado select-flecha">
-                        <option value="" disabled selected>Grado</option>
-                        <option value="1">1° Semestre</option>
-                        <option value="2">2° Semestre</option>
-                        <option value="3">3° Semestre</option>
-                        <option value="4">4° Semestre</option>
-                        <option value="5">5° Semestre</option>
-                        <option value="6">6° Semestre</option>
-                    </select>
+                    <CustomSelect
+                        label="Grado"
+                        opciones={["1° Semestre", "2° Semestre", "3° Semestre", "4° Semestre", "5° Semestre", "6° Semestre"]}
+                        valor={grado}
+                        alCambiar={setGrado}
+                    />
 
-                    <select className="input-ovalado select-flecha">
-                        <option value="" disabled selected >Grupo</option>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                        <option value="E">E</option>
-                        <option value="F">F</option>
-                    </select>
+                    <CustomSelect
+                        label="Grupo"
+                        opciones={["A", "B", "C", "D", "E", "F"]}
+                        valor={grupo}
+                        alCambiar={setGrupo}
+                    />
 
-                    <input type="tel" placeholder="Télefono" className="input-ovalado" />
+                    <input type="tel" placeholder="Teléfono" className="input-ovalado" />
                 </div>
 
-                {/* Panel Derecho: Código de Barras y Botones */}
                 <div className="panel-derecho-barcode">
                     <div className="contenedor-barcode">
                         <img src="/barcode_sim.png" alt="Código de barras" className="barcode-img" />
                         <p className="barcode-text">{codigo}</p>
                     </div>
-
-                    <button className="btn-generar-negro">Generar codigo</button>
-
+                    <button className="btn-generar-negro">Generar código</button>
                     <div className="botones-inferiores">
                         <button className="btn-registrar-verde">Registrar</button>
                         <button className="btn-regresar-naranja" onClick={alRegresar}>Regresar</button>

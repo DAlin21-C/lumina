@@ -1,11 +1,15 @@
 import React, { useState } from 'react'; // Agregamos useState aquí
+import { useNavigate } from 'react-router-dom';
 import '../plantillascss/Bienvenida.css';
 import RegistroAdministrador from './RegistroAdministrador'; //
 import RegistrarAlumno from "./RegistrarAlumno";
 import ListaAsistencia from "./ListaAsistencia.jsx";
 import ListaDatos from "./ListaDatos.jsx";
+import Modificaciones from "./Modificaciones";
+import Eliminaciones from "./Eliminaciones.jsx";
 
 function Bienvenida({ alCerrarSesion }) {
+    const navigate = useNavigate();
     // Estado para controlar qué submenú se muestra al hacer hover
     const [submenuAbierto, setSubmenuAbierto] = useState(null);
     // Estado para decidir qué mostrar en el contenido principal
@@ -37,11 +41,13 @@ function Bienvenida({ alCerrarSesion }) {
 
                         {submenuAbierto === 'modificar' && (
                             <div className="submenu-floating">
-                                <div className="submenu-item">
+                                <div className="submenu-item" onClick={() => setVistaActual('modificar_tabla')}>
                                     <img src="/lapiz.png" className="sidebar-icon" alt="Actualizar" />
                                     <span>Actualizar</span>
                                 </div>
-                                <div className="submenu-item">
+
+                                {/* 2. CONEXIÓN DEL BOTÓN ELIMINAR */}
+                                <div className="submenu-item" onClick={() => setVistaActual('eliminar_tabla')}>
                                     <img src="/quitar-usuario.png" className="sidebar-icon" alt="Eliminar" />
                                     <span>Eliminar</span>
                                 </div>
@@ -96,10 +102,17 @@ function Bienvenida({ alCerrarSesion }) {
                     </div>
                 </nav>
 
-                <div className="nav-item logout-btn" onClick={alCerrarSesion}>
+                <div
+                    className="nav-item logout-btn"
+                    onClick={() => {
+                        alCerrarSesion(); // si tienes lógica de cerrar sesión
+                        navigate('/Login.jsx'); // redirige al login
+                    }}
+                >
                     <img src="/energia.png" className="sidebar-icon" alt="cerrar" />
                     <span>Cerrar sesión</span>
                 </div>
+
             </aside>
 
             <main className="main-content">
@@ -119,6 +132,11 @@ function Bienvenida({ alCerrarSesion }) {
 
                     {/* Espacio donde se cargan los formularios */}
                     <div className="workspace">
+                        {vistaActual === 'modificar_tabla' && <Modificaciones />}
+
+                        {/* 3. RENDERIZADO CONDICIONAL DE ELIMINACIONES */}
+                        {vistaActual === 'eliminar_tabla' && <Eliminaciones />}
+
                         {vistaActual === 'registro_admin' && (
                             <RegistroAdministrador alRegresar={() => setVistaActual('inicio')} />
                         )}

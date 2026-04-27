@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import * as XLSX from 'xlsx';
+import { FaEye, FaSearch, FaTimes, FaTable, FaFileDownload } from 'react-icons/fa';
 import '../plantillascss/ListaDatos.css';
 
 function ListaDatos() {
@@ -7,179 +8,144 @@ function ListaDatos() {
     const [mostrarModal, setMostrarModal] = useState(false);
     const [nombreArchivo, setNombreArchivo] = useState("");
     const [datosExcel, setDatosExcel] = useState([]);
-    const [excelSeleccionado, setExcelSeleccionado] = useState(""); // Para la descarga
     const [cargando, setCargando] = useState(false);
 
-    // 🔹 Datos de los grupos
+    // Asegúrate de que las rutas en 'excel' sean correctas dentro de tu carpeta public
     const [grupos] = useState([
-        { grado: "1", grupo: "A", especialidad: "General", excel: "/excel/prueba1.xlsx" },
-        { grado: "3", grupo: "A", especialidad: "Agropecuario", excel: "/excel/prueba1.xlsx" },
-        { grado: "5", grupo: "A", especialidad: "Programación", excel: "/excel/prueba1.xlsx" },
-        { grado: "5", grupo: "A", especialidad: "Sist.P.Pecuario", excel: "/excel/prueba1.xlsx" },
-        { grado: "3", grupo: "A", especialidad: "Ofimática", excel: "/excel/prueba1.xlsx" },
-        { grado: "1", grupo: "F", especialidad: "General", excel: "/excel/prueba1.xlsx" },
-        { grado: "3", grupo: "A", especialidad: "Programación", excel: "/excel/prueba1.xlsx" },
-        { grado: "5", grupo: "A", especialidad: "Contabilidad", excel: "/excel/prueba1.xlsx" }
+        { id: 1, grado: "1", grupo: "A", especialidad: "General", excel: "/excel/prueba1.xlsx" },
+        { id: 2, grado: "3", grupo: "A", especialidad: "Agropecuario", excel: "/excel/prueba1.xlsx" },
+        { id: 3, grado: "5", grupo: "A", especialidad: "Programación", excel: "/excel/prueba1.xlsx" },
+        { id: 4, grado: "1", grupo: "F", especialidad: "General", excel: "/excel/prueba1.xlsx" },
+        { id: 5, grado: "5", grupo: "B", especialidad: "Contabilidad", excel: "/excel/prueba1.xlsx" }
     ]);
 
-    // 🔹 Lógica para leer el Excel
+    // --- FUNCIÓN CRÍTICA: LEE EL ARCHIVO Y LLENA LA TABLA ---
     const leerExcel = async (ruta) => {
         setCargando(true);
         try {
             const respuesta = await fetch(ruta);
+            if (!respuesta.ok) throw new Error("No se pudo encontrar el archivo Excel");
+
             const arrayBuffer = await respuesta.arrayBuffer();
-            const libro = XLSX.read(arrayBuffer);
+            const libro = XLSX.read(arrayBuffer, { type: 'array' });
+
+            // Obtenemos la primera hoja
             const nombreHoja = libro.SheetNames[0];
             const hoja = libro.Sheets[nombreHoja];
-            const json = XLSX.utils.sheet_to_json(hoja, { header: 1 });
+
+            // Convertimos a JSON con formato de matriz (arreglo de arreglos)
+            const json = XLSX.utils.sheet_to_json(hoja, { header: 1, defval: "" });
+
             setDatosExcel(json);
         } catch (error) {
-            console.error("Error leyendo el Excel:", error);
-            setDatosExcel([["Error al cargar el contenido"]]);
+            console.error("Error:", error);
+            setDatosExcel([["Error", "No se encontraron datos en el archivo seleccionado"]]);
         }
         setCargando(false);
     };
 
-    // 🔹 Abrir Modal (Vista)
+    const descargarExcel = () => {
+        if (datosExcel.length === 0) return;
+        const ws = XLSX.utils.aoa_to_sheet(datosExcel);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Datos");
+        XLSX.writeFile(wb, `${nombreArchivo}.xlsx`);
+    };
+
     const abrirModal = (item) => {
-        const nombreRef = `${item.grado}° "${item.grupo}" - ${item.especialidad || "General"}`;
-        setNombreArchivo(nombreRef);
-        setExcelSeleccionado(item.excel);
+        setNombreArchivo(`${item.grado}° "${item.grupo}" - ${item.especialidad}`);
         setMostrarModal(true);
-        leerExcel(item.excel);
+        leerExcel(item.excel); // Aquí se dispara la carga de datos
     };
 
-    const cerrarModal = () => {
-        setMostrarModal(false);
-        setDatosExcel([]);
-        setExcelSeleccionado("");
-    };
-
-    // 🔹 Función para Descargar
-    const descargarExcel = (ruta) => {
-        const link = document.createElement("a");
-        link.href = ruta;
-        link.setAttribute("download", "Lista_Asistencia.xlsx");
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    };
-
-    // 🔹 Filtro
     const gruposFiltrados = useMemo(() => {
-        const termino = busqueda.toLowerCase().trim();
         return grupos.filter(item =>
-            item.grado.includes(termino) ||
-            item.grupo.toLowerCase().includes(termino) ||
-            item.especialidad.toLowerCase().includes(termino)
+            item.grado.includes(busqueda) ||
+            item.especialidad.toLowerCase().includes(busqueda.toLowerCase())
         );
     }, [busqueda, grupos]);
 
     return (
-        <div className="contenedor-principal-listas">
-            <header className="header-listas">
-                <div className="banner-titulo-verde">
-                    <h2>📂 Listas de Datos</h2>
+        <div className="lista-datos-container">
+            <div className="header-seccion">
+                <div className="titulo-wrapper">
+                    <FaTable className="icon-main" />
+                    <h2>Listas de Datos</h2>
                 </div>
-                <div className="search-wrapper">
-                    <div className="search-container">
-                        <span className="search-icon">🔍</span>
-                        <input
-                            type="text"
-                            placeholder="Buscar por grado, grupo o especialidad..."
-                            className="search-input"
-                            value={busqueda}
-                            onChange={(e) => setBusqueda(e.target.value)}
-                        />
-                    </div>
+                <div className="search-bar-modern">
+                    <FaSearch className="search-icon-svg" />
+                    <input
+                        type="text"
+                        placeholder="Filtrar por grado o carrera..."
+                        value={busqueda}
+                        onChange={(e) => setBusqueda(e.target.value)}
+                    />
                 </div>
-            </header>
-
-            {/* 🔹 TARJETAS */}
-            <div className="grid-contenedor-tarjetas">
-                {gruposFiltrados.length > 0 ? (
-                    gruposFiltrados.map((item, index) => (
-                        <div className="tarjeta-clase" key={index}>
-                            <div className="espaciador-izquierdo"></div>
-                            <div className="texto-tarjeta">
-                                <span className="grado-grupo">
-                                    {item.grado}° "{item.grupo}"
-                                </span>
-                                {item.especialidad && (
-                                    <span className="especialidad-texto">
-                                        {item.especialidad}
-                                    </span>
-                                )}
-                            </div>
-                            <div className="acciones-verticales">
-                                {/* 👁️ VER (Llama al Modal de Excel) */}
-                                <button
-                                    className="btn-vista"
-                                    onClick={() => abrirModal(item)}
-                                    title="Ver lista"
-                                >
-                                    👁️
-                                </button>
-                                {/* 📥 DESCARGAR */}
-                                <button
-                                    className="btn-descarga"
-                                    onClick={() => descargarExcel(item.excel)}
-                                    title="Descargar archivo"
-                                >
-                                    📥
-                                </button>
-                            </div>
-                        </div>
-                    ))
-                ) : (
-                    <div className="sin-resultados">
-                        No se encontraron grupos que coincidan con "{busqueda}"
-                    </div>
-                )}
             </div>
 
-            {/* 🔹 MODAL CON VISTA PREVIA ESTILO EXCEL */}
+            <div className="grid-tarjetas-compactas">
+                {gruposFiltrados.map((item) => (
+                    <div className="card-mini" key={item.id}>
+                        <div className="card-info">
+                            <span className="badge-grado">{item.grado}° {item.grupo}</span>
+                            <p className="txt-especialidad">{item.especialidad}</p>
+                        </div>
+                        <button className="btn-view-only" onClick={() => abrirModal(item)}>
+                            <FaEye />
+                        </button>
+                    </div>
+                ))}
+            </div>
+
             {mostrarModal && (
-                <div className="modal-overlay" onClick={cerrarModal}>
-                    <div className="modal-box modal-excel-grande" onClick={(e) => e.stopPropagation()}>
-                        <div className="modal-header">
-                            <span>📊 {nombreArchivo}</span>
-                            <button className="btn-cerrar-x" onClick={cerrarModal}>✕</button>
+                <div className="modal-overlay-modern" onClick={() => setMostrarModal(false)}>
+                    <div className="modal-content-excel" onClick={e => e.stopPropagation()}>
+                        <div className="modal-header-excel">
+                            <div className="header-info">
+                                <FaTable style={{marginRight: '10px'}}/>
+                                <h3>{nombreArchivo}</h3>
+                            </div>
+                            <button className="close-x" onClick={() => setMostrarModal(false)}><FaTimes /></button>
                         </div>
 
-                        <div className="modal-body scroll-excel">
+                        <div className="modal-body-excel">
                             {cargando ? (
-                                <div className="loader">Cargando datos...</div>
+                                <div className="spinner-container">
+                                    <div className="spinner"></div>
+                                    <p>Cargando información...</p>
+                                </div>
                             ) : (
-                                <table className="tabla-previa-excel">
-                                    <thead>
-                                    <tr>
-                                        <th className="excel-header-index"></th>
-                                        {datosExcel[0]?.map((_, index) => (
-                                            <th key={index} className="excel-header-col">
-                                                {String.fromCharCode(65 + index)}
-                                            </th>
-                                        ))}
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {datosExcel.map((fila, i) => (
-                                        <tr key={i}>
-                                            <td className="excel-row-index">{i + 1}</td>
-                                            {fila.map((celda, j) => (
-                                                <td key={j} className="excel-cell">{celda}</td>
+                                <div className="excel-table-wrapper">
+                                    <table className="excel-table-view">
+                                        <thead>
+                                        <tr>
+                                            <th className="excel-idx"></th>
+                                            {/* Generamos letras de columnas (A, B, C...) dinámicamente */}
+                                            {datosExcel[0]?.map((_, index) => (
+                                                <th key={index} className="excel-col-letter">
+                                                    {String.fromCharCode(65 + index)}
+                                                </th>
                                             ))}
                                         </tr>
-                                    ))}
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                        {datosExcel.map((fila, i) => (
+                                            <tr key={i}>
+                                                <td className="excel-row-num">{i + 1}</td>
+                                                {fila.map((celda, j) => (
+                                                    <td key={j}>{celda}</td>
+                                                ))}
+                                            </tr>
+                                        ))}
+                                        </tbody>
+                                    </table>
+                                </div>
                             )}
                         </div>
 
-                        <div className="modal-footer">
-                            <button className="btn-cerrar" onClick={cerrarModal}>Cerrar Vista</button>
-                            <button className="btn-descargar-modal" onClick={() => descargarExcel(excelSeleccionado)}>
-                                📥 Descargar Excel
+                        <div className="modal-footer-excel">
+                            <button className="btn-descargar-excel" onClick={descargarExcel}>
+                                <FaFileDownload /> Descargar Excel
                             </button>
                         </div>
                     </div>
